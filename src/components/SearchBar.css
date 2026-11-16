@@ -8,6 +8,7 @@
   border-radius: 8px;
 }
 
+
 .search-bar:focus {
   outline: none;
   border-color: var(--color-primary);

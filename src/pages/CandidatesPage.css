@@ -23,3 +23,14 @@
   margin-top: 2rem;
   color: var(--color-muted);
 }
+
+
+@media (max-width: 480px) {
+  .candidates-page-header {
+    margin: 1.25rem 0 0.75rem;
+  }
+
+  .candidates-page-title {
+    font-size: 1.5rem;
+  }
+}

@@ -1,4 +1,4 @@
-
+/* Los colores del sitio, definidos una sola vez. Se usan con var(--nombre). */
 :root {
   --color-bg: #f5f6f8;
   --color-surface: #ffffff;
@@ -12,6 +12,7 @@
   --color-focus: rgba(15, 92, 110, 0.15);
 }
 
+/* El borde y el relleno cuentan dentro del ancho de cada elemento. */
 * {
   box-sizing: border-box;
 }
@@ -24,7 +25,7 @@ body {
   line-height: 1.5;
 }
 
-
+/* Quita los márgenes que el navegador pone por defecto. */
 h1,
 h2,
 h3,
@@ -32,9 +33,16 @@ p {
   margin: 0;
 }
 
-
+/* Centra el contenido y limita su ancho. */
 .container {
   max-width: 1000px;
   margin: 0 auto;
   padding: 0 1.5rem;
+}
+
+/* Pantallas angostas: menos margen lateral para aprovechar el ancho. */
+@media (max-width: 480px) {
+  .container {
+    padding: 0 1rem;
+  }
 }
