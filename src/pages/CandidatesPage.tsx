@@ -4,7 +4,6 @@ import { SearchBar } from '../components/SearchBar';
 import { CandidateList } from '../components/CandidateList';
 import './CandidatesPage.css';
 
-// Pasa a minúsculas y quita las tildes, para que "maria" encuentre a "María".
 const normalizeText = (text: string): string =>
   text.toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g, '');
 
@@ -12,10 +11,15 @@ export const CandidatesPage = () => {
   // El estado del texto que el usuario escribió.
   const [searchTerm, setSearchTerm] = useState<string>('');
 
-  // Limpia el texto: sin espacios y sin mayúsculas ni tildes.
+  const [favoriteIds, setFavoriteIds] = useState<number[]>([]);
+  const handleToggleFavorite = (id: number) => {
+    setFavoriteIds(
+      favoriteIds.includes(id) ? favoriteIds.filter((favoriteId) => favoriteId !== id) : [...favoriteIds, id],
+    );
+  };
+
   const normalizedTerm = normalizeText(searchTerm.trim());
 
-  // La lista filtrada: queda el candidato cuyo nombre o ciudad contiene el texto.
   const filteredCandidates = candidates.filter(
     (candidate) =>
       normalizeText(candidate.name).includes(normalizedTerm) || normalizeText(candidate.city).includes(normalizedTerm),
@@ -40,7 +44,11 @@ export const CandidatesPage = () => {
       </div>
 
       {filteredCandidates.length > 0 ? (
-        <CandidateList candidates={filteredCandidates} favoriteIds={[]} onToggleFavorite={() => {}} />
+        <CandidateList
+          candidates={filteredCandidates}
+          favoriteIds={favoriteIds}
+          onToggleFavorite={handleToggleFavorite}
+        />
       ) : (
         <p className="candidates-page-empty">No se encontraron candidatos con ese término.</p>
       )}
